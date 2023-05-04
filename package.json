@@ -1,0 +1,36 @@
+{
+  "name": "aws-food-fair-api",
+  "version": "1.0.0",
+  "description": "",
+  "type": "commonjs",
+  "scripts": {
+    "test:integration": "vitest --run **/integration/*.test.js",
+    "test:e2e": "vitest --run **/e2e/*.test.js",
+    "format": "prettier --write \"index.mjs\" \"tests/**/*.{js,mjs}\"",
+    "lint": "eslint \"index.mjs\" \"tests/**/*.{js,mjs}\" --fix",
+    "build": "rm function.zip && zip function.zip index.mjs",
+    "deploy": "aws lambda update-function-code --function-name crud-food-fair-function --zip-file fileb://function.zip",
+    "deploy:security": "npm run test:integration && npm run deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^1.4.0",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^2.8.8",
+    "sinon": "^15.0.4",
+    "vitest": "^0.30.1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.321.1",
+    "@aws-sdk/lib-dynamodb": "^3.321.1",
+    "dotenv": "^16.0.3"
+  }
+}
